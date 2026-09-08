@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<commands>
+  <command ID="Cmd_UD_DefaultMissile" DisplayText="Select default missile weapon" Category="Popup" Layer="UI" Auto="Down">
+    <keyboardBind Key="f"/>
+    <gamepadBind Button="rightShoulder"/>
+  </command>
+  <command ID="Cmd_UD_LastMissile" DisplayText="Select last fired missile weapon" Category="Popup" Layer="UI" Auto="Down">
+    <keyboardBind Key="r"/>
+    <gamepadBind Button="rightStickPress"/>
+  </command>
+</commands>

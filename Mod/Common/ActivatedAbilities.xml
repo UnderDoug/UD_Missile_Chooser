@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<activatedabilities>
+  <ability Command="UD_Missile_Chooser::ChooseWeaponToggleCmd">
+    <description>
+      <p>Choose which of your missile weapons to fire when you have more than one but aren't firing them all at once.</p>
+      <br />
+      <p><stat Name="CancelBehavior" /></p>
+      <br />
+      <p>The &quot;selection cancel behavior&quot; can be altered in the options menu, under the {{C|Mod: Choose Missile Weapon}} section.</p>
+    </description>
+    <UITile Tile="Abilities/Choose_Missile_Off.png" Foreground="y" Detail="c" />
+    <UITile Tile="Abilities/Choose_Missile_On.png" Foreground="Y" Detail="C" State="ToggleOn" />
+  </ability>
+</activatedabilities>

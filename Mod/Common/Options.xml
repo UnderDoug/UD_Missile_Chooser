@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<options>
+  <option
+        ID="Option_UD_Missile_Chooser_EnableDefaultFallbackOnCancel"
+        DisplayText="Enable falling back to default behavior when cancelling selection"
+        Category="Mod: Choose Missile Weapon"
+        Type="Checkbox"
+        Default="No"
+    >
+    <helptext>
+      When enabled, cancelling out of the missile weapon selection popup will fall back to the default behavior of selecting a random weapon (the one indicated {{W|default}}).
+      
+      When disabled, cancelling out of the missile weapon selection popup will cancel the &quot;fire missile weapon&quot; action altogether.
+
+      The default is {{w|Disabled}}.
+    </helptext>
+  </option>
+</options>
