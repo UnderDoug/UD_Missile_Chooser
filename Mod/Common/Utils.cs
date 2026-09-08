@@ -2,22 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-
-using ConsoleLib.Console;
 
 using HarmonyLib;
 
-using Qud.UI;
-
 using XRL;
-using XRL.Collections;
-using XRL.Language;
-using XRL.UI;
 using XRL.Wish;
-using XRL.World;
-using XRL.World.Capabilities;
-using XRL.World.Parts;
 
 namespace UD_Missile_Chooser.Mod
 {

@@ -1,14 +1,14 @@
 ﻿using HarmonyLib;
 
 using System;
-
-using XRL.World;
-
-using UD_Missile_Chooser.Mod.Events;
-using XRL.World.Parts;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Reflection;
+
+using XRL.World;
+using XRL.World.Parts;
+
+using UD_Missile_Chooser.Mod.Events;
 
 namespace UD_Missile_Chooser.Mod.Harmony
 {
