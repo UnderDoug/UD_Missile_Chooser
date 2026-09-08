@@ -37,12 +37,9 @@ namespace UD_Missile_Chooser.Mod
         public const string TICK = "\u221A";  // √
         public const string CROSS = "\u0058"; // X
         public const string SQUR = "\xfe"; // ■
-        public const string LNES = "\xf0"; // ≡
-        public const string CIRC = "\x09"; // ○
 
         public const string BULLET = "\u0007"; // •
         public const string NBSP = "\xFF"; // " "
-        public const string DF = "\u000f"; // ☼
 
         #region Pseudo-Debug
 

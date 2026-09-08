@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 using HarmonyLib;
 
 using XRL;
 using XRL.Collections;
-using XRL.Language;
 using XRL.World;
-using XRL.World.Capabilities;
-using XRL.World.Parts;
 using XRL.World.Text;
 
 namespace UD_Missile_Chooser.Mod
@@ -191,62 +185,11 @@ namespace UD_Missile_Chooser.Mod
                 yield return output;
         }
 
-        public static IEnumerable<T> PerformFunctionRecursively<T>(this GameObject Object, Func<GameObject, T> Func, int Depth = 0)
-            => Object.PerformFunctionRecursively(
-                Func: delegate (GameObject go, int depth)
-                {
-                    return Func.Invoke(go);
-                },
-                Depth: Depth)
-            ;
-
-        public static StringBuilder AppendPair<TKey, TValue>(this StringBuilder SB, TKey Key, TValue Value)
-            => SB.Append(Key).Append(": ").Append(Value)
-            ;
-
-        public static TextBuilder AppendPair<TKey, TValue>(this TextBuilder TB, TKey Key, TValue Value)
-            => TB.Append(Key).Append(": ").Append(Value)
-            ;
-
-        public static StringBuilder AppendPair<TKey, TValue>(this StringBuilder SB, KeyValuePair<TKey, TValue> KVP)
-            => SB.AppendPair(KVP.Key, KVP.Value)
-            ;
-
-        public static TextBuilder AppendPair<TKey, TValue>(this TextBuilder TB, KeyValuePair<TKey, TValue> KVP)
-            => TB.AppendPair(KVP.Key, KVP.Value)
-            ;
-
         public static string Colored(this string Text, string Color)
             => Color != null
             ? Text?.WithColor(Color)
             : Text
             ;
-
-        public static string Are(this GameObject Object)
-            => Object.IsPlural
-            ? "are"
-            : "is"
-            ;
-
-        public static void SuspendExaminerDuringAction(this GameObject Relic, Action Action)
-        {
-            int epistemicStatus = -1;
-            var examiner = Relic?.GetPart<Examiner>();
-            if (examiner != null)
-            {
-                epistemicStatus = examiner.EpistemicStatus;
-                examiner.EpistemicStatus = Examiner.EPISTEMIC_STATUS_KNOWN;
-            }
-            try
-            {
-                Action?.Invoke();
-            }
-            finally
-            {
-                if (examiner != null)
-                    examiner.EpistemicStatus = epistemicStatus;
-            }
-        }
 
         public static void RemoveAll<T>(this ScopeDisposedList<T> Source, Predicate<T> Where)
         {
@@ -269,10 +212,6 @@ namespace UD_Missile_Chooser.Mod
         public static bool IsEmptyOrDefault(this Guid Guid)
             => Guid == default
             || Guid == Guid.Empty
-            ;
-
-        public static string OrdinalSuffix(this int Number)
-            => $"{Number}{Grammar.Ordinal(Number)[^2..]}"
             ;
 
         public static IEnumerable<GameObjectBlueprint> SafelyGetBlueprintsInheritingFrom(
@@ -324,98 +263,20 @@ namespace UD_Missile_Chooser.Mod
             return false;
         }
 
-        public static T WaitResult<T>(this Task<T> Task)
-        {
-            if (Task == null)
-                return default;
-
-            Task.Wait();
-
-            return Task.Result;
-        }
-
-        public static async Task<TResult> AwaitResultIfNotIsCompletedSuccessfully<TResult>(this Task<TResult> ResultTask)
-            => (ResultTask?.IsCompletedSuccessfully) is true
-            ? ResultTask.Result
-            : await ResultTask
-            ;
-
-        public static bool IsTwixt(this int Value, int LowerInclusive, int UpperExclusive)
-            => Value >= LowerInclusive
-            && Value < UpperExclusive
-            ;
-
-        public static ulong ToUInt64<T>(this T Value)
-            where T : Enum
-            => Convert.GetTypeCode(Value) switch
-            {
-                TypeCode.SByte or
-                TypeCode.Int16 or
-                TypeCode.Int32 or
-                TypeCode.Int64 => (ulong)Convert.ToInt64(Value, CultureInfo.InvariantCulture),
-
-                TypeCode.Boolean or
-                TypeCode.Char or
-                TypeCode.Byte or
-                TypeCode.UInt16 or
-                TypeCode.UInt32 or
-                TypeCode.UInt64 => Convert.ToUInt64(Value, CultureInfo.InvariantCulture),
-
-                _ => throw new InvalidOperationException("Unknown enum type."),
-            };
-
-        public static bool IsTwixtInclusive<T>(this T Value, T Lower, T Upper)
-            where T : Enum
-            => Value.ToUInt64() >= Lower.ToUInt64()
-            && Value.ToUInt64() <= Upper.ToUInt64()
-            ;
-
-        public static StringBuilder AppendLineEnd(this StringBuilder SB)
-            => SB.AppendLine().Append("=ud_nbsp=".StartReplace().ToString())
-            ;
-
-        public static TextBuilder AppendLineEnd(this TextBuilder TB)
-            => TB.AppendLine().Append("=ud_nbsp=".StartReplace().ToString())
-            ;
-
-        public static StringBuilder AppendRule(this StringBuilder SB, object Value)
-            => Value != null
-            ? SB.AppendColored("rules", Value.ToString())
-            : SB
-            ;
-
         public static TextBuilder AppendRule(this TextBuilder TB, object Value)
             => Value != null
             ? TB.AppendColored("rules", Value.ToString())
             : TB
             ;
 
-        public static StringBuilder AppendQuote(this StringBuilder SB, object Value)
-            => SB.Append("\"").Append(Value).Append("\"")
-            ;
-
         public static TextBuilder AppendQuote(this TextBuilder TB, object Value)
             => TB.Append("\"").Append(Value).Append("\"")
             ;
 
-        public static StringBuilder AppendBullet(
-            this StringBuilder SB,
-            string Color = null,
-            string Bullet = "\u0007"
-            )
-        {
-            if (Color.IsNullOrEmpty())
-                SB.Append(Bullet);
-            else
-                SB.AppendColored(Color, Bullet);
-
-            return SB.Append(" ");
-        }
-
         public static TextBuilder AppendBullet(
             this TextBuilder TB,
             string Color = null,
-            string Bullet = "\u0007"
+            string Bullet = Utils.BULLET
             )
         {
             if (Color.IsNullOrEmpty())
@@ -426,18 +287,10 @@ namespace UD_Missile_Chooser.Mod
             return TB.Append(" ");
         }
 
-        public static StringBuilder AppendBulletLine(
-            this StringBuilder SB,
-            string Color = null,
-            string Bullet = "\u0007"
-            )
-            => SB.AppendLine().AppendBullet(Color, Bullet)
-            ;
-
         public static TextBuilder AppendBulletLine(
             this TextBuilder TB,
             string Color = null,
-            string Bullet = "\u0007"
+            string Bullet = Utils.BULLET
             )
             => TB.AppendLine().AppendBullet(Color, Bullet)
             ;
@@ -497,10 +350,6 @@ namespace UD_Missile_Chooser.Mod
                     : null
                     ;
         }
-
-        public static StringBuilder AppendIndent(this StringBuilder TB, int Amount = 0, int Factor = 2, int MaxIndent = 12, bool AsNBSP = false)
-            => TB.Append(Amount.Indent(Factor, MaxIndent, AsNBSP))
-            ;
 
         public static TextBuilder AppendIndent(this TextBuilder SB, int Amount = 0, int Factor = 2, int MaxIndent = 12, bool AsNBSP = false)
             => SB.Append(Amount.Indent(Factor, MaxIndent, AsNBSP))

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 using ConsoleLib.Console;
@@ -9,7 +8,6 @@ using Qud.UI;
 using static Qud.UI.MissileWeaponArea;
 
 using XRL.Collections;
-using XRL.Rules;
 using XRL.UI;
 using XRL.World.Text;
 
