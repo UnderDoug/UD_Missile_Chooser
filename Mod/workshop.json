@@ -1,0 +1,8 @@
+{
+  "WorkshopId": 3797863562,
+  "Title": "Pick What to Fire",
+  "Description": "Current version is v0.0.1\n\nAdds a toggle ability that, when toggled on, gives you a popup to select which missile weapon to fire when trying to fire your missile weapons (if you aren't firing all of them at once).\n\nBase game behaviour picks a random weapon that excludes the last one you fired, which for most characters results in alternating (only two slots).\n\nThis mod allows you to decide which of your equipped missile weapons to fire, on a shot-by-shot basis.\n\nHaving Akimbo active bypasses the ability added by this mod. Toggle the ability off to revert to the base game behavior.\n\nCancelling out of the weapon selection cancels the \"fire missile weapon\" action, but can be modified to the base game behaviour (picking one at random) from the options menu.\n\nThe popup includes two hotkey-sensitive buttons, \"[F] Default\" and, if you've fired one already, \"[R] Last Fired\". These buttons are gamepad compatible and mappable in the control mapping menu. Their defaults are set to the default for \"fire missile weapon\" and the default for \"reload missile weapons\", respectively, to make spamming (almost) as easy as it is otherwise.\n\nMore testing required to know if it'll work with existing saves. Let me know if it doesn't and I'll add support for it.\n\n[h2]Source[/h2]\nWant to see how it's made? There's a [url=https://github.com/UnderDoug/UD_Missile_Chooser]git repository[/url]!\n\nLicence is the \"Unlicence\".\n\nIf you like something I've made, you should tell me about it!",
+  "Tags": "Feature,Vanilla+,Quality of Life,QoL,Harmony",
+  "Visibility": "2",
+  "ImagePath": "preview.png"
+}
